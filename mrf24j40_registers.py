@@ -1,5 +1,24 @@
+#    This file contains the mrf24j40 register definitions. They were parsed from the datasheet
+#    No claim for correctness nor completeness.
 
-short_addr_registers = {"testshort": 0x3F,
+#    Copyright (C) 2013  Jasper Buesch
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Author: Jasper Buesch; jasper.buesch@gmail.com
+
+short_addr_registers = {
 "RXMCR": 0x00,
 "PANIDL": 0x01,
 "PANIDH": 0x02,
@@ -59,7 +78,7 @@ short_addr_registers = {"testshort": 0x3F,
 "BBREG6": 0x3E,
 "CCAEDTH": 0x3F}
 
-long_addr_registers = {"testlong": 0x3ff,
+long_addr_registers = {
 "RFCON0": 0x200,
 "RFCON1": 0x201,
 "RFCON2": 0x202,
