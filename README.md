@@ -16,3 +16,6 @@ So far it only contains the Mrf24j40 register definitions and methods to read an
 Either the register names can be used, or the direct field names within registers (consult the datasheet).
 It is also possible to access register fields that reach across multiple registers (more than 8 bits).
 
+The mrf24j40_spi requires an SPI Python extension. The original sources can be found at https://github.com/lthiery/SPI-Py.
+
+My cleaned fork https://github.com/mstaflex/SPI-Py.
