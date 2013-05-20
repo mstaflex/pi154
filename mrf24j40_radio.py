@@ -1,12 +1,14 @@
 
 from mrf24j40_spi import Mrf24j40Spi
 import time
+import struct
 
 class Mrf24j40Radio(object):
 
     def __init__(self):
         self.spi = Mrf24j40Spi()
         self.spi.openSPI()
+        self.init_radio()
 
     def init_radio(self):
         # 0x07 - Perform a software Reset. Bit is auto-reset
@@ -61,22 +63,28 @@ class Mrf24j40Radio(object):
         int_reg = self.spi.read("INTSTAT")
         return int_reg
 
-    def readout_rxfifo(self):
+    def get_rxfifo(self):
         self.spi.write("RXDECINV", 1)
         num = self.spi.read(0x300)
         read_bytes = []
         for i in range(0, num + 2):
-            read_bytes.append(self.spi.read(0x300 + i))
+            read_bytes.append(self.spi.read(0x301 + i))
         self.spi.write("RXDECINV", 0)
-        return read_bytes
+        rssi = int(((read_bytes[-1] / 255.) * 70) - 90)
+        data = dict(bytes=read_bytes[:-4], fcs=read_bytes[-4:-2], lqi=read_bytes[-2], rssi=rssi)
+        return data
+
+    def write_txfifo(self, bytes):
+        for i in range(0, len(bytes)):
+            self.spi.write(0x000 + i, bytes[i])
+        self.spi.write("TXNTRIG", 1)
 
 
 if __name__ == '__main__':
     radio = Mrf24j40Radio()
-    radio.init_radio()
     while True:
         if radio.check_int_reg():
-            print radio.readout_rxfifo()
+            print radio.get_rxfifo()
         time.sleep(0.1)
 
 
