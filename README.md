@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 RaspPI going IEEE802.15.4
 =========================
 
@@ -23,6 +22,4 @@ This project is about controlling an Mrf24j40MA module that is connected to the 
 So far it only contains the Mrf24j40 register definitions and methods to read and write most flexible to them.
 Either the register names can be used, or the field names within registers (consult the datasheet).
 It is also possible to access register field that reach across multiple registers (more than 8 bits).
->>>>>>> Added method to readout rxfifo
 
-My cleaned fork https://github.com/mstaflex/SPI-Py.
